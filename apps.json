@@ -17,6 +17,14 @@
       "screenshots": [],
       "versions": [
         {
+          "version": "1.0.8",
+          "buildVersion": "8",
+          "date": "2026-08-16T17:19:47Z",
+          "localizedDescription": "支持角色聊天、配置 OpenAI 兼容接口、角色卡与聊天记录管理。",
+          "downloadURL": "https://github.com/blood7ao/altstore-source/releases/download/chatapp-v1.0.8/ChatApp-v1.0.8.ipa",
+          "size": 10316266
+        },
+        {
           "version": "1.0.7",
           "buildVersion": "7",
           "date": "2026-08-16T11:47:43Z",

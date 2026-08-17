@@ -6,3 +6,4 @@
 content/*.ipa
 content/apps.json
 letsencrypt/
+letsencrypt-local/

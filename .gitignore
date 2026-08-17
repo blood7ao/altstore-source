@@ -7,3 +7,4 @@ content/*.ipa
 content/apps.json
 letsencrypt/
 letsencrypt-local/
+.certbot-venv/

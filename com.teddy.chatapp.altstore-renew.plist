@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.teddy.chatapp.altstore-renew</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/teddy/soft/altstore-source/renew_ip_certificate_mac.sh</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StartInterval</key>
+  <integer>86400</integer>
+  <key>StandardOutPath</key>
+  <string>/tmp/chatapp-altstore-renew.out</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/chatapp-altstore-renew.err</string>
+</dict>
+</plist>

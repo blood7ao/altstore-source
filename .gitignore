@@ -4,3 +4,4 @@
 *.p12
 *.mobileprovision
 content/*.ipa
+content/apps.json

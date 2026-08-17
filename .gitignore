@@ -3,3 +3,4 @@
 *.zip
 *.p12
 *.mobileprovision
+content/*.ipa

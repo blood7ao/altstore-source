@@ -1,10 +1,10 @@
 # Chat App AltStore 源
 
-这个项目提供 Chat App 的 **AltStore Classic Source**：
+这个项目提供 Chat App 的 **AltStore Classic Source**，并通过自建服务器直接托管 IPA：
 
-- `apps.json` 由 GitHub Pages 托管，作为 AltStore 的 Source URL。
-- `.ipa` 文件上传到 GitHub Releases，不提交到 Git 仓库。
-- Chat App 的 `build_ipa.sh` 会自动构建 IPA、创建 Release、上传 IPA，并更新 `apps.json`。
+- Docker/Nginx 提供 `apps.json` 和 IPA 下载服务。
+- `.ipa` 文件作为服务器数据同步，不提交到 Git 仓库。
+- Chat App 的 `build_ipa.sh` 会自动构建 IPA、更新 `apps.json`、推送部署代码、重构 Docker 并上传构建产物。
 
 > 这是给 AltStore Classic（支持直接下载 IPA）的模板。AltStore PAL 使用的是 ADP/`manifest.json` 分发流程，不能直接把这里的 IPA URL 当成 PAL 的下载地址。
 
@@ -12,9 +12,13 @@
 
 ```text
 altstore-source/
-├── apps.json             # AltStore Source JSON
+├── apps.json             # AltStore Source JSON（GitHub 备份）
 ├── assets/
 │   └── README.md         # 图标和截图放置说明
+├── content/              # 服务器挂载目录，IPA 不进入 Git
+├── Dockerfile            # Nginx 静态服务镜像
+├── docker-compose.yml    # 服务器 Docker 编排
+├── nginx.conf            # 下载响应和缓存策略
 └── README.md
 ```
 
@@ -23,12 +27,22 @@ altstore-source/
 当前源已配置 Chat App：
 
 - Bundle ID：`com.teddy.chatapp`
-- 当前版本：`1.0.7 (7)`
+- 当前版本：以 `apps.json` 中 `versions[0]` 为准
 - GitHub 仓库：[blood7ao/altstore-source](https://github.com/blood7ao/altstore-source)
 
 ## 第一次使用
 
-### 1. 创建 GitHub 仓库
+### 1. 服务器源地址
+
+当前服务器源地址为：
+
+```text
+http://8.138.233.235:8789/apps.json
+```
+
+在 AltStore 的 **Add Source** 中添加这个地址。服务器使用独立 Docker 容器监听 `8789`，不会占用现有 Web 服务的 80 端口。
+
+### 2. GitHub 代码仓库
 
 仓库已经创建。后续如果重新初始化本地源，可执行：
 
@@ -42,7 +56,7 @@ git remote add origin https://github.com/blood7ao/altstore-source.git
 git push -u origin main
 ```
 
-### 2. 开启 GitHub Pages
+### 3. GitHub Pages 备用源
 
 在仓库的 **Settings → Pages** 中选择：
 
@@ -50,15 +64,15 @@ git push -u origin main
 - **Branch**：`main`
 - **Folder**：`/ (root)`
 
-部署完成后，Source URL 是：
+部署完成后，备用 Source URL 是：
 
 ```text
 https://blood7ao.github.io/altstore-source/apps.json
 ```
 
-在 AltStore 的 **Add Source** 中添加这个 Pages 地址。不要使用 GitHub 的 `blob` 页面地址。
+不要使用 GitHub 的 `blob` 页面地址；正常使用时优先使用服务器源地址。
 
-### 3. 自动发布 IPA
+### 4. 自动发布 IPA
 
 在 `chat_app` 目录直接运行：
 
@@ -71,12 +85,14 @@ cd /Users/teddy/soft/Silly/chat_app
 
 - 递增 Chat App 版本号和构建号；
 - 校验 IPA 内的 Bundle ID、版本号和构建号；
-- 创建或更新 `chatapp-vX.Y.Z` GitHub Release；
-- 上传 `ChatApp-vX.Y.Z.ipa`；
+- 将部署代码推送到 GitHub 源仓库；
+- 在服务器上拉取代码并执行 `docker compose up --build -d`；
+- 将 `apps.json` 和 `ChatApp-vX.Y.Z.ipa` 原子上传到服务器；
 - 更新 `apps.json` 的最新版本、下载地址和文件大小；
-- 提交并推送源配置。
+- 提交并推送源配置；
+- 使用 HTTP 请求验收 Source JSON 和 IPA 下载地址。
 
-首次使用需要本机完成一次 `gh auth login`，之后不需要手动管理 Release 或 `apps.json`。
+默认服务器配置已经写入 `build_ipa.sh`。如果服务器地址或 SSH 密钥改变，可通过 `ALTSTORE_SERVER_URL`、`ALTSTORE_SERVER_HOST`、`ALTSTORE_SERVER_KEY` 等环境变量覆盖。
 
 ## 需要替换的字段
 
@@ -94,7 +110,7 @@ cd /Users/teddy/soft/Silly/chat_app
 | `version` | IPA 的 `CFBundleShortVersionString` |
 | `buildVersion` | IPA 的 `CFBundleVersion` |
 | `date` | ISO 8601 日期，例如 `2026-08-16` |
-| `downloadURL` | GitHub Release 中 IPA 附件的公开直链 |
+| `downloadURL` | 自建服务器上 IPA 文件的公开直链 |
 | `size` | IPA 文件大小，单位是字节 |
 | `entitlements` | IPA 使用的非系统必需 entitlements |
 | `privacy` | `Info.plist` 中实际使用的 `UsageDescription` 字段及文案 |
@@ -102,7 +118,7 @@ cd /Users/teddy/soft/Silly/chat_app
 图标和截图可以放进仓库的 `assets/`，然后使用 Pages 地址引用，例如：
 
 ```text
-https://YOUR_GITHUB_USERNAME.github.io/altstore-source/assets/app-icon.png
+https://blood7ao.github.io/altstore-source/assets/app-icon.png
 ```
 
 当前配置中的应用标识、图标地址和权限已与 Chat App 的 iOS 工程保持一致。

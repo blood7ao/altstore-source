@@ -1,0 +1,10 @@
+services:
+  altstore-source:
+    build: .
+    container_name: altstore-source
+    restart: unless-stopped
+    ports:
+      - "${ALTSTORE_PORT:-8789}:80"
+    volumes:
+      - ./content:/usr/share/nginx/html:ro
+

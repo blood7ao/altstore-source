@@ -5,3 +5,4 @@
 *.mobileprovision
 content/*.ipa
 content/apps.json
+letsencrypt/

@@ -1,0 +1,1 @@
+17 3 * * * root /root/altstore-source/renew_ip_certificate.sh >>/var/log/altstore-source-renew.log 2>&1

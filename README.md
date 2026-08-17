@@ -37,10 +37,10 @@ altstore-source/
 当前服务器源地址为：
 
 ```text
-http://8.138.233.235:8789/apps.json
+https://8.138.233.235/apps.json
 ```
 
-在 AltStore 的 **Add Source** 中添加这个地址。服务器使用独立 Docker 容器监听 `8789`，不会占用现有 Web 服务的 80 端口。
+在 AltStore 的 **Add Source** 中添加这个地址。服务器使用独立 Docker 容器提供 HTTPS，HTTP 端口仅用于跳转到 HTTPS。IP 证书为短期证书，由服务器每天自动检查续期。
 
 ### 2. GitHub 代码仓库
 

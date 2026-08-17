@@ -174,7 +174,7 @@ AltServer for macOS 提供了实验性的 `altsource` 工具，可以根据 IPA 
 
 ## 注意事项
 
-- GitHub Releases 的 IPA 必须公开，否则手机上的 AltStore 无法下载。
+- 服务器的 IPA 文件必须可公开访问，否则手机上的 AltStore 无法下载。
 - 不要把 Apple ID、证书私钥、`.p12`、`.mobileprovision` 或其他敏感文件提交到仓库。
 - 免费 Apple ID 的 AltStore Classic 侧载应用仍受 Apple 的签名有效期和设备数量限制；自建 Source 只负责提供元数据和下载地址。
 - 如果 IPA 不是你自己开发或没有合法分发权限，请不要通过公开 Source 分发。

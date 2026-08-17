@@ -41,6 +41,35 @@
           "NSLocalNetworkUsageDescription": "用于在同一局域网内的设备之间同步角色卡与聊天记录。"
         }
       }
+    },
+    {
+      "bundleIdentifier": "com.ted3y.chatapp",
+      "name": "Chat App",
+      "developerName": "blood7ao",
+      "subtitle": "SillyTavern 角色聊天客户端",
+      "localizedDescription": "面向 iPhone 和 iPad 的角色聊天客户端，支持角色卡导入、聊天记录管理、主题切换、统计数据展示，以及连接用户配置的 OpenAI 兼容接口。",
+      "iconURL": "https://gitee.com/blood7ao/Silly/raw/standlone/chat_app/assets/app_icon.png",
+      "tintColor": "#5B5CE2",
+      "category": "social",
+      "screenshots": [],
+      "appPermissions": {
+        "entitlements": [
+          "keychain-access-groups"
+        ],
+        "privacy": {
+          "NSLocalNetworkUsageDescription": "用于在同一局域网内的设备之间同步角色卡与聊天记录。"
+        }
+      },
+      "versions": [
+        {
+          "version": "1.0.11",
+          "buildVersion": "11",
+          "date": "2026-08-17T06:42:03Z",
+          "localizedDescription": "支持角色聊天、配置 OpenAI 兼容接口、角色卡与聊天记录管理。",
+          "downloadURL": "https://github.com/blood7ao/altstore-source/releases/download/chatapp-v1.0.11/ChatApp-v1.0.11.ipa",
+          "size": 10570002
+        }
+      ]
     }
   ],
   "news": []

@@ -25,6 +25,14 @@
       },
       "versions": [
         {
+          "version": "1.0.17",
+          "buildVersion": "17",
+          "date": "2026-08-17T15:32:29Z",
+          "localizedDescription": "支持角色聊天、配置 OpenAI 兼容接口、角色卡与聊天记录管理。",
+          "downloadURL": "https://8.138.233.235/ChatApp-v1.0.17.ipa",
+          "size": 10366623
+        },
+        {
           "version": "1.0.16",
           "buildVersion": "16",
           "date": "2026-08-17T12:32:31Z",

@@ -6,7 +6,7 @@
   "website": "https://gitee.com/blood7ao/Silly",
   "apps": [
     {
-      "bundleIdentifier": "com.ted3y.chatapp",
+      "bundleIdentifier": "com.teddy.chatapp",
       "name": "Chat App",
       "developerName": "blood7ao",
       "subtitle": "SillyTavern 角色聊天客户端",
@@ -25,12 +25,12 @@
       },
       "versions": [
         {
-          "version": "1.0.14",
-          "buildVersion": "14",
-          "date": "2026-08-17T09:19:05Z",
+          "version": "1.0.15",
+          "buildVersion": "15",
+          "date": "2026-08-17T09:34:58Z",
           "localizedDescription": "支持角色聊天、配置 OpenAI 兼容接口、角色卡与聊天记录管理。",
-          "downloadURL": "https://8.138.233.235/ChatApp-v1.0.14.ipa",
-          "size": 10569019
+          "downloadURL": "https://8.138.233.235/ChatApp-v1.0.15.ipa",
+          "size": 10356639
         }
       ]
     }
